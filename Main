@@ -1,0 +1,80 @@
+#include "stdafx.h"
+#include <iostream>
+#include <time.h>
+#include<conio.h>
+#include<string>
+using namespace std;
+
+
+
+
+void displayMenu(string info)
+{
+	cout << endl;
+	cout << info << endl;
+	cout << "1.Wczytaj z pliku" << endl;
+	cout << "2.Usun" << endl;
+	cout << "3.Dodaj" << endl;
+	cout << "4.Znajdz" << endl;
+	cout << "5.Utworz losowo" << endl;
+	cout << "6.Wyswietl" << endl;
+	cout << "7.Test (pomiary)" << endl;
+	cout << "0.Powrot do menu" << endl;
+	cout << "Podaj opcje:";
+}
+
+
+//Table myTab; //myTab może być dynamiczna, może byc zadeklarowana w manu_table 
+
+void menu_tablicy()
+{
+	
+
+}
+
+void menu_listy()
+{
+	//analogicznie jak menu_table()
+}
+
+void menu_kopca()
+{
+	//analogicznie jak menu_table()
+}
+ 
+int main(int argc, char* argv[])
+{
+	srand(time(NULL));
+
+	char option;
+	do {
+		cout << endl;
+		cout << "==== MENU GLOWNE ===" << endl;
+		cout << "1.Tablica" << endl;
+		cout << "2.Lista" << endl;
+		cout << "3.Kopiec" << endl;
+		cout << "0.Wyjscie" << endl;
+		cout << "Podaj opcje:";
+		option = getche();
+		cout << endl;
+
+		switch (option) {
+		case '1':
+			menu_tablicy();
+			break;
+
+		case '2':
+			menu_listy();
+			break;
+
+		case '3':
+			menu_kopca();
+			break;
+		}
+
+	} while (option != '0');
+
+
+	return 0;
+}
+
