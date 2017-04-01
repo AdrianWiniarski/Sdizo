@@ -1,9 +1,14 @@
+#include "stdafx.h"
+#include <fstream>
+#include <iostream>
+#include <conio.h>
+#include <windows.h>
 class Tablica
 {
 protected:
 	int *Tab;
 	int rozmiar;
-	int licznik;
+	//int licznik;
 public:
 	~Tablica();
 	Tablica();
@@ -14,5 +19,6 @@ public:
 	void usunliczbenap();
 	void usunliczbelos();
 	void wypisztablice();
+	void Stworz();
 
 };
