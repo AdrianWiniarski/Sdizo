@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include <iostream>
 #include <time.h>
-#include<conio.h>
-#include<string>
+#include <conio.h>
+#include <string>
+#include <fstream>
+#include "Tablica.h"
+#include <windows.h>
 using namespace std;
 
 
@@ -10,15 +13,18 @@ using namespace std;
 
 void displayMenu(string info)
 {
+
 	cout << endl;
 	cout << info << endl;
-	cout << "1.Wczytaj z pliku" << endl;
-	cout << "2.Usun" << endl;
-	cout << "3.Dodaj" << endl;
-	cout << "4.Znajdz" << endl;
-	cout << "5.Utworz losowo" << endl;
-	cout << "6.Wyswietl" << endl;
-	cout << "7.Test (pomiary)" << endl;
+	cout << "1.Stworz Tablice" << endl;
+	cout << "2.Usun na poczatku" << endl;
+	cout << "3.Usun na koncu" << endl;
+	cout << "4.Dodaj na poczatku" << endl;
+	cout << "5.Dodaj na koncu" << endl;
+	cout << "6.Dodaj losowo" << endl;
+	cout << "7.Usun losowo" << endl;
+	cout << "8.Wyswietl" << endl;
+	cout << "9.Test (pomiary)" << endl;
 	cout << "0.Powrot do menu" << endl;
 	cout << "Podaj opcje:";
 }
@@ -28,7 +34,55 @@ void displayMenu(string info)
 
 void menu_tablicy()
 {
-	
+	char opt;
+	int index, value;
+	Tablica myTab;
+
+	do {
+		displayMenu("--- TABLICA ---");
+		opt = getch();
+		cout << endl;
+		switch (opt) {
+		case '1': //Tworzenie tablicy
+			myTab.Stworz();
+			myTab.wypisztablice();
+			break;
+
+		case '2': //Usuwanie elementu z tablicy na poczatku
+			myTab.usunliczbenap();
+			myTab.wypisztablice();
+			break;
+
+		case '3': //usuwanie elemetu do tablicy na koncu
+			myTab.usunliczbenak();
+			myTab.wypisztablice();
+			break;
+
+		case '4': //dodawanie liczby na poczatku
+			myTab.dodajliczbenap();
+			myTab.wypisztablice();
+			break;
+		case '5':  //dodaj liczbe na koncu
+			myTab.dodajliczbenak();
+			myTab.wypisztablice();
+			break;
+
+		case '6': //tutaj nasza funkcja do eksperymentów (pomiary czasów i generowanie daneych) - nie będzie testowana przez prowadzącego 
+			myTab.dodajliczbelos();
+			myTab.wypisztablice();
+			break;
+		case '7':
+			myTab.wypisztablice();
+			break;
+		case '8': //wyswietla tablice
+			myTab.wypisztablice();
+			break;
+		case '9':
+			myTab.wypisztablice();
+			break;
+		}
+
+	} while (opt != '0');
 
 }
 
@@ -41,7 +95,7 @@ void menu_kopca()
 {
 	//analogicznie jak menu_table()
 }
- 
+
 int main(int argc, char* argv[])
 {
 	srand(time(NULL));
@@ -53,6 +107,7 @@ int main(int argc, char* argv[])
 		cout << "1.Tablica" << endl;
 		cout << "2.Lista" << endl;
 		cout << "3.Kopiec" << endl;
+		cout << "4.Drzewo Czerwono-Czane" << endl;
 		cout << "0.Wyjscie" << endl;
 		cout << "Podaj opcje:";
 		option = getche();
