@@ -7,100 +7,163 @@ using namespace std;
 
 void Tablica::dodajliczbenak()
 {
-
-	Tablica *Kopia = new Tablica; // tworze kopie tablicy liczb
-	delete[] Tab; // usuwam z pamieci
-	Tab = nullptr;
 	rozmiar++;
-	Tab = new int[rozmiar]; // alokuje nowa o 1 wieksza
-	for (int i = 0; i < licznik; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+	int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
+	
+	for (int i = 0; i < rozmiar-1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
 	{
-		Tab[i] = Kopia->Tab[i];
+		Kopia[i] = Tab[i];
 	}
+	delete[] Tab; // usuwam z pamieci
+	int a;
+	a = rand();
+	Kopia[rozmiar-1] = a;
+	Tab = Kopia;
 };
 
 void Tablica::dodajliczbenap()
 {
 
-
-	Tablica *Kopia = new Tablica; // tworze kopie tablicy liczb
-	delete[] Tab; // usuwam z pamieci
-	Tab = nullptr;
 	rozmiar++;
-	Tab = new int[rozmiar]; // alokuje nowa o 1 mniejsza
-	for (int i = 1; i < licznik; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
-	{
-		Tab[i] = Kopia->Tab[i];
-	}
-	int a;
-	cout << endl << "Podaj liczbe ktora chcesz dodac na poczatek :" << endl;
-	cin >> a;
+	int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
 
-	Tab[0] =a; 
+	for (int i = 0; i < rozmiar - 1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+	{
+		Kopia[i+1] = Tab[i];
+	}
+	delete[] Tab; // usuwam z pamieci
+	int a;
+	a = rand();
+	Kopia[0] = a;
+	Tab = Kopia;
 };
 
 void Tablica::usunliczbenap()
 {
-	Tablica *Kopia = new Tablica; // tworze kopie tablicy liczb
-	delete[] Tab; // usuwam z pamieci
-	Tab = nullptr;
-	rozmiar--;
-	Tab = new int[rozmiar]; // alokuje nowa o 1 mniejsza
-	for (int i = 1; i < licznik; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+	if (rozmiar > 0)
 	{
-		Tab[i] = Kopia->Tab[i];
+		rozmiar--;
+		int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
+
+		for (int i = 0; i < rozmiar; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+		{
+			Kopia[i] = Tab[i + 1];
+		}
+		delete[] Tab; // usuwam z pamieci
+		Tab = Kopia;
+	}
+	else
+	{
+		cout << endl << "Wielkosc tablicy jest rowna: " << rozmiar << "." << endl << "Zalecane: Stworz tablice." << endl;
+		getch();
 	}
 };
 
 void Tablica::usunliczbenak()
 {
 
-	Tablica *Kopia = new Tablica; // tworze kopie tablicy liczb
-	delete[] Tab; // usuwam z pamieci
-	Tab = nullptr;
-	rozmiar--;
-	Tab = new int[rozmiar]; // alokuje nowa o 1 mniejsza
-	for (int i = 0; i < licznik; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+	if (rozmiar > 0)
 	{
-		Tab[i] = Kopia->Tab[i];
+		rozmiar--;
+		int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
+
+		for (int i = 0; i < rozmiar; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+		{
+			Kopia[i] = Tab[i];
+		}
+		delete[] Tab; // usuwam z pamieci
+		Tab = Kopia;
+	}
+	else
+	{
+		system("cls");
+		cout << endl << "Wielkosc tablicy jest rowna: " << rozmiar << "." << endl << "Zalecane: Stworz tablice." << endl;
+		Sleep(3000);
+		system("cls");
 	}
 
 };
 
-/*void Tablica::dodajliczbelos()
+void Tablica::dodajliczbelos()
 {
-
-	Tablica Kopia(*this); // tworze kopie tablicy liczb
-	delete[] Tab; // usuwam z pamieci
-	rozmiar++;
-	Tab = new Liczba[rozmiar]; // alokuje nowa o 1 mniejsza
-	for (int i = 0; i < licznik; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+	int a;
+	if (rozmiar > 0)
 	{
-		Tab[i] = Kopia.Tab[i++];
+		rozmiar++;
+		do {
+			cout << endl << "Podaj miejsce z przedziału <" << 1 << "," << rozmiar << "> w którym ma być dodana liczba " << endl;
+			cin >> a;
+		} while (a<0 || a>rozmiar);
+		
+		int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
+		
+		for (int i = 0; i < a-1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+		{
+			Kopia[i] = Tab[i];
+		}
+		for (int i = a-1 ; i < rozmiar; i++)
+		{
+			Kopia[i] = Tab[i];
+		}
+		Kopia[a] = rand();
+		delete[] Tab; // usuwam z pamieci
+		Tab = Kopia;
 	}
+	else
+	{
+		rozmiar++;
+		int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
 
-};*/
+		for (int i = 0; i < rozmiar - 1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+		{
+			Kopia[i] = Tab[i];
+		}
+		delete[] Tab; // usuwam z pamieci
+		a = rand();
+		Kopia[rozmiar - 1] = a;
+		Tab = Kopia;
+	}
+};
 
 void Tablica::wypisztablice()
 {
-	for (int i = 0; i < licznik; i++)
+	system("cls");
+	for (int i = 0; i < rozmiar; i++)
 	{
-		cout << Tab[i] << " ";
+		cout<<endl<<i+1<<". "<< Tab[i];
 	}
+	cout << endl;
 };
 
 Tablica::Tablica()
 {
 	rozmiar = 0;//zeruje parametry
 	Tab = NULL;
-	licznik = 0;
 };
 
 
 Tablica::~Tablica()
 {
-	licznik = 0;
+
 	rozmiar = 0;
 	delete[] Tab;
 	Tab = 0;
+};
+
+void Tablica::Stworz()
+{
+	Tab = NULL;
+	cout << endl << "Podaj ilosc elementow tablicy jaka chcesz stworzyc: " << endl;
+	cin >> rozmiar;
+	system("cls");
+	cout << "Podana ilosc wynosi " << rozmiar;
+	Sleep(2000);
+	system("cls");
+	cout << "Trwa tworzenie tablicy " << endl;
+	Sleep(2000);
+	Tab = new int[rozmiar];
+	for (int i = 0; i<rozmiar; i++)
+	{
+		Tab[i] = rand();
+	}
 };
