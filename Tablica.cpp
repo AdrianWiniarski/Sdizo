@@ -9,16 +9,17 @@ void Tablica::dodajliczbenak()
 {
 	rozmiar++;
 	int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
-	
-	for (int i = 0; i < rozmiar-1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
+
+	for (int i = 0; i < rozmiar - 1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
 	{
 		Kopia[i] = Tab[i];
 	}
 	delete[] Tab; // usuwam z pamieci
 	int a;
 	a = rand();
-	Kopia[rozmiar-1] = a;
+	Kopia[rozmiar - 1] = a;
 	Tab = Kopia;
+	Kopia = nullptr;
 };
 
 void Tablica::dodajliczbenap()
@@ -29,13 +30,14 @@ void Tablica::dodajliczbenap()
 
 	for (int i = 0; i < rozmiar - 1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
 	{
-		Kopia[i+1] = Tab[i];
+		Kopia[i + 1] = Tab[i];
 	}
 	delete[] Tab; // usuwam z pamieci
 	int a;
 	a = rand();
 	Kopia[0] = a;
 	Tab = Kopia;
+	Kopia = nullptr;
 };
 
 void Tablica::usunliczbenap()
@@ -51,6 +53,7 @@ void Tablica::usunliczbenap()
 		}
 		delete[] Tab; // usuwam z pamieci
 		Tab = Kopia;
+		Kopia = nullptr;
 	}
 	else
 	{
@@ -73,6 +76,7 @@ void Tablica::usunliczbenak()
 		}
 		delete[] Tab; // usuwam z pamieci
 		Tab = Kopia;
+		Kopia = nullptr;
 	}
 	else
 	{
@@ -84,45 +88,62 @@ void Tablica::usunliczbenak()
 
 };
 
-void Tablica::dodajliczbelos()
+void Tablica::usunliczbelos()
 {
-	int a;
-	if (rozmiar > 0)
-	{
-		rozmiar++;
-		do {
-			cout << endl << "Podaj miejsce z przedziału <" << 1 << "," << rozmiar << "> w którym ma być dodana liczba " << endl;
-			cin >> a;
-		} while (a<0 || a>rozmiar);
-		
-		int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
-		
-		for (int i = 0; i < a-1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
-		{
-			Kopia[i] = Tab[i];
+	if (rozmiar != 0) {
+		int indeks;
+		if (rozmiar == 0)   indeks = 0;         //unikamy dzielenia przez zero
+		else indeks = rand() % rozmiar;
+
+		int *Kopia = new int[rozmiar - 1];
+		for (int i = 0; i < indeks; i++) {
+			Kopia[i] = Tab[i];                //przepisz wszystkie wartosci przed indeksem usuwanej wartosci
 		}
-		for (int i = a-1 ; i < rozmiar; i++)
-		{
-			Kopia[i] = Tab[i];
+		for (int i = 0; i < (rozmiar - 1); i++) {
+			Kopia[i] = Tab[i + 1];
 		}
-		Kopia[a] = rand();
-		delete[] Tab; // usuwam z pamieci
+
+		delete[] Tab;
 		Tab = Kopia;
+		Kopia = nullptr;
+		rozmiar--;
 	}
 	else
 	{
-		rozmiar++;
-		int *Kopia = new int[rozmiar]; // tworze kopie tablicy liczb
-
-		for (int i = 0; i < rozmiar - 1; i++) // nadpisuje kazdy element biorac obiekty z kopii (referencyjnie)
-		{
-			Kopia[i] = Tab[i];
-		}
-		delete[] Tab; // usuwam z pamieci
-		a = rand();
-		Kopia[rozmiar - 1] = a;
-		Tab = Kopia;
+		system("cls");
+		cout << endl << "Wielkosc tablicy jest rowna: " << rozmiar << "." << endl << "Zalecane: Stworz tablice." << endl;
+		Sleep(3000);
+		system("cls");
 	}
+};
+
+void Tablica::dodajliczbelos()
+{
+	//wybrane if (indeks >= rozmiar || indeks<0)    return false;       //sprawdz czy ktos nie podal za duzego indeksu
+	//wybrane else {
+	int liczba;
+	liczba = rand();
+	int indeks;
+	if (rozmiar == 0)   indeks = 0;         //unikamy dzielenia przez zero
+	else indeks = rand() % rozmiar;
+
+
+	int *Kopia = new int[rozmiar + 1];    //wskaznik na nowa o jeden wieksza tablcie
+	Kopia[indeks] = liczba;               //wstaw zadana liczbe na zadane miejsce
+
+	for (int i = 0; i < indeks; i++) {      //do miejsca wstawienia nowej wartosci
+		Kopia[i] = Tab[i];                //przepisz stare
+	}
+	for (int i = indeks; i < rozmiar; i++) {//kolejne tez przepisz
+		Kopia[i + 1] = Tab[i];
+	}
+
+	delete[] Tab;               //zwolnij pamiec
+	Tab = Kopia;          //przypisz nowy wskaznik
+	Kopia = nullptr;
+	rozmiar++;              //zwieksz rozmiar o jeden
+    //return indeks;
+	//wybrane }
 };
 
 void Tablica::wypisztablice()
@@ -130,10 +151,24 @@ void Tablica::wypisztablice()
 	system("cls");
 	for (int i = 0; i < rozmiar; i++)
 	{
-		cout<<endl<<i+1<<". "<< Tab[i];
+		cout << endl << i + 1 << ". " << Tab[i];
 	}
 	cout << endl;
-};
+}
+void Tablica::zaladujzpliku()
+{
+
+	fstream plik;
+	plik.open("liczby.txt");
+	plik >> rozmiar;
+	Tab = new int[rozmiar];
+	if (plik.good() == false)
+		cout << "Plik zostal zle wczytany";
+	for (int i = 0; i<rozmiar; i++)
+		plik >> Tab[i];
+	plik.close();
+}
+;
 
 Tablica::Tablica()
 {
