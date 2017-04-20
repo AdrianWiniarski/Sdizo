@@ -8,18 +8,19 @@ class Tablica
 protected:
 	int *Tab;
 	int rozmiar;
-	//int licznik;
+	int liczba;
 public:
 	~Tablica();
 	Tablica();
-	void dodajliczbenak();
-	void dodajliczbenap();
-	void dodajliczbelos();
+	void dodajliczbenak(int liczba);
+	void dodajliczbenap(int liczba);
+	void dodajliczbelos(int liczba,int index);
 	void usunliczbenak();
 	void usunliczbenap();
-	void usunliczbelos();
+	void usunliczbelos(int index);
 	void wypisztablice();
 	void zaladujzpliku();
 	void Stworz();
+	void szukaj(int val);
 };
 
