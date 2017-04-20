@@ -5,6 +5,11 @@
 
 using namespace std;
 
+Kopiec::Kopiec() {
+	Kopiec::Tab = NULL;
+	Kopiec::rozmiar = 0;
+}
+
 bool Kopiec::zaladujzpliku() {
 
 	int n = 0;
@@ -33,71 +38,117 @@ bool Kopiec::zaladujzpliku() {
 	return true;
 }
 
+Kopiec::~Kopiec() {
 
-void Kopiec::dodajdokopca(int liczba) {
-
-	int j, k;
-	int* Kopia = new int[rozmiar + 1];
-	for (int i = 0; i<rozmiar; i++)
-		Kopia[i] = Tab[i];
-	Kopia[rozmiar] = liczba;
-	rozmiar++;
-	delete[] Tab;
-	Tab = Kopia;
-	j = rozmiar - 1;
-	k = (j - 1) / 2;
-	while (j>0 && Tab[k]<liczba) {
-		Tab[j] = Tab[k];
-		j = k;
-		k = (j - 1) / 2;
+	if (Kopiec::rozmiar > 0) {
+		delete[]Tab;
 	}
-	Tab[j] = liczba;
-}
-
-void Kopiec::usunzkopca(int liczba) {
-
-	int index;
-	for (int i = 0; i<rozmiar; i++) {
-		if (Tab[i] == liczba)
-			index = i;
-	}
-	int j, k, v;
-	v = Tab[rozmiar - 1];
-	j = index;
-	k = 2 * index + 1;
-	Tab[index] = Tab[rozmiar - 1];
-	int* Kopia = new int[--rozmiar];
-	for (int h = 0; h<rozmiar; h++)
-		Kopia[h] = Tab[h];
-	delete[] Tab;
-	Tab = Kopia;
-	while (k<rozmiar - 1)
-	{
-		if (k + 1 < rozmiar - 1 && Tab[k + 1] > Tab[k]) k++;
-		if (v >= Tab[k]) break;
-		Tab[j] = Tab[k];
-		j = k;
-		k = 2 * k + 1;
-	}
-	Tab[j] = v;
-}
-
-
-
-void Kopiec::wyswietlkopiec() {
-	system("cls");
-	for (int i = 0; i<rozmiar; i++)
-		cout << i + 1 << ". " << Tab[i] << endl;
 
 }
 
-bool Kopiec::czyjestwsrod(int liczba) {
+void Kopiec::dodaj(int wartosc) {
 
-	for (int i = 0; i<rozmiar; i++) {
-		if (Tab[i] == liczba)
+
+	if (!Kopiec::sprawdzCzyIstnieje(wartosc)) {
+		int *Kopia = new int[rozmiar + 1];
+		for (int i = 0; i < rozmiar; i++) {
+			Kopia[i] = Tab[i];
+		}
+		Kopia[rozmiar] = wartosc;
+		delete[]Tab;
+		Tab = Kopia;
+		Kopiec::poprawStrukture();
+		rozmiar++;
+
+
+	}
+
+}
+
+void Kopiec::usun(int wartosc) {
+
+	
+	for (int i = 0; i < rozmiar; i++) {
+
+		if (Tab[i] == wartosc) {
+			int *Kopia = new int[rozmiar - 1]; 
+
+			for (int k = 0; k < i; k++) {
+				Kopia[k] = Tab[k];
+			}
+			for (int k = i + 1; k < rozmiar; k++) {
+				Kopia[k - 1] = Tab[k];
+			}
+			delete[]Tab;
+			Tab = Kopia;
+
+			rozmiar--;
+
+			Kopiec::poprawStrukture();
+			return;
+
+		}
+
+	}
+
+}
+
+bool Kopiec::sprawdzCzyIstnieje(int wartosc) {
+
+	
+	for (int i = 0; i < rozmiar; i++) {
+		
+		if (Tab[i] == wartosc) {
+			system("cls");
+			cout << "Szukana wartosc znajduje sie w kopcu"<< endl;
+			Sleep(2000);
+			system("cls");
 			return true;
-	}
+		}
+	} 
+	system("cls");
+	cout << "Szukana wartosc nie znajduje sie w kopcu" << endl;
+	Sleep(2000);
+	system("cls");
 	return false;
 
 }
 
+
+
+void Kopiec::wyswietlKopiec() {
+
+	system("cls");
+
+	cout << "Aktualny stan kopca:" << endl;
+	//Jeżeli tablica nie ma elementów, wyświetl komunikat
+	//W przeciwnym wypadku wydrukuj wszystkie elementy tablicy
+	if (Tab != NULL) {
+		for (int i = 0; i < rozmiar; i++) {
+			cout  << i+1 << ". " << Tab[i] << endl;
+		}
+	}
+	else {
+		cout << "    Tablica nie ma zadnych elementów" << endl;
+	}
+
+}
+
+void Kopiec::poprawStrukture() {
+
+	//Zmienna pomocnicza do pętli sortującej
+	int Kopia = 0;
+
+	//Pętla sortująca, układająca elementy kopca w odpowiedniej kolejności
+	for (int i = rozmiar; 0 < i; i--) {
+		if (Tab[i - 1] < Tab[i]) {
+			Kopia = Tab[i - 1];
+			Tab[i - 1] = Tab[i];
+			Tab[i] = Kopia;
+		}
+
+
+	}
+
+
+}
