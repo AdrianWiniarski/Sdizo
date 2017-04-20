@@ -45,7 +45,8 @@ void displayMenu(string info)
 	cout << "6.Dodaj losowo" << endl;
 	cout << "7.Usun losowo" << endl;
 	cout << "8.Wyswietl" << endl;
-	cout << "9.Test (pomiary)" << endl;
+	cout << "9.Znajdz" << endl;
+	cout << "t.Test (pomiary)" << endl;
 	cout << "0.Powrot do menu" << endl;
 	cout << "Podaj opcje:";
 }
@@ -56,11 +57,15 @@ void displayMenu1(string info)
 	cout << endl;
 	cout << info << endl;
 	cout << "1.zaladuj z pliku" << endl;
-	cout << "2.Usun z listy" << endl;;
-	cout << "3.Dodaj do listy" << endl;
-	cout << "4.znajdz" << endl;
-	cout << "5.Wyswietl" << endl;
-	cout << "6.Test (pomiary)" << endl;
+	cout << "2.Usun z listy na poczatku" << endl;;
+	cout << "3.Dodaj do listy na poczatku" << endl;
+	cout << "4.Usun z listy na koncu" << endl;;
+	cout << "5.Dodaj do listy na koncu" << endl;
+	cout << "6.Usun z listy losowo" << endl;;
+	cout << "7.Dodaj do listy losowo" << endl;
+	cout << "8.znajdz" << endl;
+	cout << "9.Wyswietl" << endl;
+	cout << "t.Test (pomiary)" << endl;
 	cout << "0.Powrot do menu" << endl;
 	cout << "Podaj opcje:";
 }
@@ -76,7 +81,7 @@ void displayMenu2(string info)
 	cout << "3.znajdz" << endl;
 	cout << "4.wyswiatl" << endl;
 	cout << "5.zaladuj" << endl;
-	cout << "6.Test (pomiary)" << endl;
+	cout << "t.Test (pomiary)" << endl;
 	cout << "0.Powrot do menu" << endl;
 	cout << "Podaj opcje:";
 }
@@ -84,7 +89,7 @@ void displayMenu2(string info)
 void menu_tablicy()
 {
 	char opt1, opt2;
-	int index, value;
+	int index, value,x;
 	Tablica myTab;
 
 	do {
@@ -108,26 +113,44 @@ void menu_tablicy()
 			break;
 
 		case '4': //dodawanie liczby na poczatku
-			myTab.dodajliczbenap();
+		
+			cout << " podaj liczbe jaka chcesz dodac " << endl;
+			cin >> x;
+			myTab.dodajliczbenap(x);
 			myTab.wypisztablice();
 			break;
 		case '5':  //dodaj liczbe na koncu
-			myTab.dodajliczbenak();
+			
+			cout << " podaj liczbe jaka chcesz dodac " << endl;
+			cin >> x;
+			myTab.dodajliczbenak(x);
 			myTab.wypisztablice();
 			break;
 
 		case '6': //tutaj nasza funkcja do eksperymentów (pomiary czasów i generowanie daneych) - nie będzie testowana przez prowadzącego 
-			myTab.dodajliczbelos();
+			
+			cout << " podaj liczbe jaka chcesz dodac " << endl;
+			cin >> x;
+			cout << " podaj index " << endl;
+			cin >> index;
+			myTab.dodajliczbelos(x,index);
 			myTab.wypisztablice();
 			break;
 		case '7':
-			myTab.usunliczbelos();
+			cout << endl << "Podaj index do usuniecia :" << endl;
+			cin >> index;
+			myTab.usunliczbelos(index);
 			myTab.wypisztablice();
 			break;
 		case '8': //wyswietla tablice
 			myTab.wypisztablice();
 			break;
 		case '9':
+			cout << "Podaj liczbe jaka chces znalezc w tablicy " << endl;
+			cin >> value;
+			myTab.szukaj(value);
+			break;
+		case 't':
 
 			do {
 
@@ -154,24 +177,42 @@ void menu_tablicy()
 					break;
 
 				case '4': //dodawanie liczby na poczatku
-					myTab.dodajliczbenap();
+				
+					cout << " podaj liczbe jaka chcesz dodac " << endl;
+					cin >> x;
+					myTab.dodajliczbenap(x);
 					myTab.wypisztablice();
 					break;
 				case '5':  //dodaj liczbe na koncu
-					myTab.dodajliczbenak();
+				
+					cout << " podaj liczbe jaka chcesz dodac " << endl;
+					cin >> x;
+					myTab.dodajliczbenak(x);
 					myTab.wypisztablice();
 					break;
 
 				case '6': //tutaj nasza funkcja do eksperymentów (pomiary czasów i generowanie daneych) - nie będzie testowana przez prowadzącego 
-					myTab.dodajliczbelos();
+					
+					cout << " podaj liczbe jaka chcesz dodac " << endl;
+					cin >> x;
+					cout << " podaj index " << endl;
+					cin >> index;
+					myTab.dodajliczbelos(x, index);
 					myTab.wypisztablice();
 					break;
 				case '7':
-					myTab.usunliczbelos();
+					cout << endl << "Podaj index do usuniecia :" << endl;
+					cin >> index;
+					myTab.usunliczbelos(index);
 					myTab.wypisztablice();
 					break;
 				case '8': //wyswietla tablice
 					myTab.wypisztablice();
+					break;
+				case '9':
+					cout << "Podaj liczbe jaka chces znalezc w tablicy " << endl;
+					cin >> value;
+					myTab.szukaj(value);
 					break;
 
 
@@ -201,39 +242,56 @@ void menu_listy()
 		cout << endl;
 		switch (opt1) {
 		case '1': // Wczytywanie listy z pliku
-			myList.zaladujzplikulista();
-			myList.wyswietl();
+			myList.zaladujzplikuLista();
+			myList.wyswietlListe();
 			break;
 
 		case '2': //Usuwanie elementu z listy
-			cout << " Podaj index:";
-			cin >> index;
-			myList.usunzlisty(index);
-			myList.wyswietl();
+			myList.usunWpocz();
+			myList.wyswietlListe();
 			break;
 
 		case '3': //Dodawanie elementu do listy
+			cout << " Podaj wartosc:";
+			cin >> value;
+			myList.dodajWpocz(value);
+			myList.wyswietlListe();
+			break;
+
+		case '4': //Znajdowanie elementu w liscie
+			myList.usunWkon();
+			myList.wyswietlListe();
+			break;
+		case '5':  //Wyswietlanie listy
+			cout << " Podaj wartosc:";
+			cin >> value;
+			myList.dodajWkon(value);
+			myList.wyswietlListe();
+			break;
+		case '6':  //Wyswietlanie listy
+			cout << "Podaj indeks: ";
+			cin >> index;
+			myList.usunWlos(index);
+		 	myList.wyswietlListe();
+			break;
+		case '7':  //Wyswietlanie listy
 			cout << "Podaj indeks: ";
 			cin >> index;
 			cout << " Podaj wartosc:";
 			cin >> value;
-			myList.dodajdolisty(index, value);
-			myList.wyswietl();
+			myList.dodajWlos(value, index);
+			myList.wyswietlListe();
 			break;
-
-		case '4': //Znajdowanie elementu w liscie
-			cout << " Podaj wartosc:";
+		case '8':  //Wyswietlanie listy
+			cout << "Podaj szukana wartosc :" << endl;
 			cin >> value;
-			if (myList.czyjestwsrod(value))
-				cout << "Podana wartosc jest w tablicy";
-			else
-				cout << "Podanej wartosci nie ma w tablicy";
+			myList.czyJest(value);
+			myList.wyswietlListe();
 			break;
-
-		case '5':  //Wyswietlanie listy
-			myList.wyswietl();
+		case '9':  //Wyswietlanie listy
+			myList.wyswietlListe();
 			break;
-		case'6':
+		case't':
 			do {
 
 				displayMenu1("--- POMIAR CZASU ---");
@@ -244,37 +302,54 @@ void menu_listy()
 				switch (opt2) {
 
 				case '1': // Wczytywanie listy z pliku
-					myList.zaladujzplikulista();
-					myList.wyswietl();
+					myList.zaladujzplikuLista();
+					myList.wyswietlListe();
 					break;
 
 				case '2': //Usuwanie elementu z listy
-					cout << " Podaj index:";
-					cin >> index;
-					myList.usunzlisty(index);
-					myList.wyswietl();
+					myList.usunWpocz();
+					myList.wyswietlListe();
 					break;
 
 				case '3': //Dodawanie elementu do listy
+					cout << " Podaj wartosc:";
+					cin >> value;
+					myList.dodajWpocz(value);
+					myList.wyswietlListe();
+					break;
+
+				case '4': //Znajdowanie elementu w liscie
+					myList.usunWkon();
+					myList.wyswietlListe();
+					break;
+				case '5':  //Wyswietlanie listy
+					cout << " Podaj wartosc:";
+					cin >> value;
+					myList.dodajWkon(value);
+					myList.wyswietlListe();
+					break;
+				case '6':  //Wyswietlanie listy
+					cout << "Podaj indeks: ";
+					cin >> index;
+					myList.usunWlos(index);
+					myList.wyswietlListe();
+					break;
+				case '7':  //Wyswietlanie listy
 					cout << "Podaj indeks: ";
 					cin >> index;
 					cout << " Podaj wartosc:";
 					cin >> value;
-					myList.dodajdolisty(index, value);
-					myList.wyswietl();
+					myList.dodajWlos(value, index);
+					myList.wyswietlListe();
 					break;
-
-				case '4': //Znajdowanie elementu w liscie
-					cout << " Podaj wartosc:";
+				case '8':  //Wyswietlanie listy
+					cout << "Podaj szukana wartosc :" << endl;
 					cin >> value;
-					if (myList.czyjestwsrod(value))
-						cout << "Podana wartosc jest w tablicy";
-					else
-						cout << "Podanej wartosci nie ma w tablicy";
+					myList.czyJest(value);
+					myList.wyswietlListe();
 					break;
-
-				case '5':  //Wyswietlanie listy
-					myList.wyswietl();
+				case '9':  //Wyswietlanie listy
+					myList.wyswietlListe();
 					break;
 
 
@@ -308,34 +383,34 @@ void menu_kopca()
 		case '1': //dodaj kpiec
 			cout << " Podaj wartosc:";
 			cin >> index;
-			myHeap.dodajdokopca(index);
-			myHeap.wyswietlkopiec();
+			myHeap.dodaj(index);
+			myHeap.wyswietlKopiec();
 			break;
-
+			 
 		case '2': //Usuwanie elementu z kopca
 			cout << " Podaj wartosc:";
 			cin >> liczba;
-			myHeap.usunzkopca(liczba);
-			myHeap.wyswietlkopiec();
+			myHeap.usun(liczba);
+			myHeap.wyswietlKopiec();
 			break;
 		case'3'://znajdowanie elem w kopcu
 			cout << "Podaj wartosc:";
 			cin >> liczba;
-			if (myHeap.czyjestwsrod(liczba))
+			if (myHeap.sprawdzCzyIstnieje(liczba))
 				cout << "Podana wartosc jest na liscie";
 			else
 				cout << "Podanej wartosci NIE ma na liscie";
 			break;
 
 		case '4': //wyswietl kopiec
-			myHeap.wyswietlkopiec();
+			myHeap.wyswietlKopiec();
 			break;
 
 		case '5': //zaladuj
 			myHeap.zaladujzpliku();
-			myHeap.wyswietlkopiec();
+			myHeap.wyswietlKopiec();
 			break;
-		case '6':  //TEST
+		case 't':  //TEST
 			do {
 
 				displayMenu2("--- POMIAR CZASU ---");
@@ -348,27 +423,27 @@ void menu_kopca()
 				case '1': //dodaj kpiec
 					cout << " Podaj wartosc:";
 					cin >> index;
-					myHeap.dodajdokopca(index);
-					myHeap.wyswietlkopiec();
+					myHeap.dodaj(index);
+					myHeap.wyswietlKopiec();
 					break;
 
 				case '2': //Usuwanie elementu z kopca
 					cout << " Podaj wartosc:";
 					cin >> liczba;
-					myHeap.usunzkopca(liczba);
-					myHeap.wyswietlkopiec();
+					myHeap.usun(liczba);
+					myHeap.wyswietlKopiec();
 					break;
 				case'3'://znajdowanie elem w kopcu
 					cout << "Podaj wartosc:";
 					cin >> liczba;
-					if (myHeap.czyjestwsrod(liczba))
+					if (myHeap.sprawdzCzyIstnieje(liczba))
 						cout << "Podana wartosc jest na liscie";
 					else
 						cout << "Podanej wartosci NIE ma na liscie";
 					break;
 
 				case '4': //wyswietl kopiec
-					myHeap.wyswietlkopiec();
+					myHeap.wyswietlKopiec();
 					break;
 
 				case '5': //zaladuj
