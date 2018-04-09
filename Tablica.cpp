@@ -1,9 +1,24 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "Tablica.h"
 #include <iostream>
 
 using namespace std;
 
+
+Tablica::Tablica()
+{
+	rozmiar = 0;//zeruje parametry
+	Tab = nullptr;
+};
+
+
+Tablica::~Tablica()
+{
+
+	rozmiar = 0;
+	delete[] Tab;
+	Tab = 0;
+};
 
 void Tablica::dodajliczbenak(int liczba)
 {
@@ -15,12 +30,10 @@ void Tablica::dodajliczbenak(int liczba)
 		Kopia[i] = Tab[i];
 	}
 	delete[] Tab; // usuwam z pamieci
-	int a;
-	a = liczba;
-	Kopia[rozmiar - 1] = a;
+	Kopia[rozmiar - 1] = liczba;
 	Tab = Kopia;
 	Kopia = nullptr;
-};
+}
 
 void Tablica::dodajliczbenap(int liczba)
 {
@@ -33,9 +46,7 @@ void Tablica::dodajliczbenap(int liczba)
 		Kopia[i + 1] = Tab[i];
 	}
 	delete[] Tab; // usuwam z pamieci
-	int a;
-	a = liczba;
-	Kopia[0] = a;
+	Kopia[0] = liczba;
 	Tab = Kopia;
 	Kopia = nullptr;
 };
@@ -58,9 +69,9 @@ void Tablica::usunliczbenap()
 	else
 	{
 		cout << endl << "Wielkosc tablicy jest rowna: " << rozmiar << "." << endl << "Zalecane: Stworz tablice." << endl;
-		getch();
+		getchar();
 	}
-};
+}
 
 void Tablica::usunliczbenak()
 {
@@ -86,14 +97,14 @@ void Tablica::usunliczbenak()
 		system("cls");
 	}
 
-};
+}
 
 void Tablica::szukaj(int val)
 {
-	int x=0;
+	int x = 0;
 	for (int i = 0; i < rozmiar; i++)
 	{
-		if(Tab[i]==val)
+		if (Tab[i] == val)
 		{
 			x = 1;
 		}
@@ -112,19 +123,20 @@ void Tablica::szukaj(int val)
 		Sleep(2000);
 		system("cls");
 	}
-};
+}
 
 void Tablica::usunliczbelos(int index)
 {
 
-	//SprawdÅº, czy tablica nie jest pusta
-	//SprawdÅ¼ czy pozycja nie wykracza poza tablicÄ™
+	//SprawdŸ, czy tablica nie jest pusta
+	//Sprawd¿ czy pozycja nie wykracza poza tablicê
 	if (rozmiar) {
-		if (index > 0 & index < rozmiar++)
+		int x = rozmiar + 1;
+		if (index > 0 & index < x)
 		{
 			if (rozmiar > 0)
 			{
-				if(index==rozmiar)
+				if (index == rozmiar)
 				{
 
 					rozmiar--;
@@ -138,10 +150,10 @@ void Tablica::usunliczbelos(int index)
 					Tab = Kopia;
 					Kopia = nullptr;
 				}
-				else if (index > 0 || index < (rozmiar - 1))
+				else if (index > 0 || index < (x - 2))
 				{
 					index--;
-					//Zaalokuj pamiÄ™Ä‡ na tablicÄ™ mniejszÄ… o jeden element niÅ¼ poprzednio
+					//Zaalokuj pamiêæ na tablicê mniejsz¹ o jeden element ni¿ poprzednio
 					int *Kopia = new int[rozmiar - 1];
 
 					//Przepisz elementy do wybranej pozycji
@@ -169,7 +181,7 @@ void Tablica::usunliczbelos(int index)
 					delete[] Tab; // usuwam z pamieci
 					Tab = Kopia1;
 					Kopia1 = nullptr;
-					
+
 				}
 			}
 			else {
@@ -181,7 +193,7 @@ void Tablica::usunliczbelos(int index)
 		}
 
 	}
-};
+}
 
 
 void Tablica::dodajliczbelos(int liczba, int index)
@@ -191,31 +203,31 @@ void Tablica::dodajliczbelos(int liczba, int index)
 	{
 		system("cls");
 		cout << "Liczba znajduje sie poza zakresem tablicy" << endl;
-			Sleep(2000);
+		Sleep(2000);
 	}
 	else {
-	
-	
-	if (rozmiar == 0)   index = 0;         //unikamy dzielenia przez zero
-	
 
 
-	int *Kopia = new int[rozmiar + 1];    //wskaznik na nowa o jeden wieksza tablcie
-	Kopia[index] = liczba;               //wstaw zadana liczbe na zadane miejsce
+		if (rozmiar == 0)   index = 0;         //unikamy dzielenia przez zero
 
-	for (int i = 0; i < index; i++) {      //do miejsca wstawienia nowej wartosci
-		Kopia[i] = Tab[i];                //przepisz stare
-	}
-	for (int i = index; i < rozmiar; i++) {//kolejne tez przepisz
-		Kopia[i + 1] = Tab[i];
-	}
 
-	delete[] Tab;               //zwolnij pamiec
-	Tab = Kopia;          //przypisz nowy wskaznik
-	Kopia = nullptr;
-	rozmiar++;              //zwieksz rozmiar o jeden
-  
-	
+
+		int *Kopia = new int[rozmiar + 1];    //wskaznik na nowa o jeden wieksza tablcie
+		Kopia[index] = liczba;               //wstaw zadana liczbe na zadane miejsce
+
+		for (int i = 0; i < index; i++) {      //do miejsca wstawienia nowej wartosci
+			Kopia[i] = Tab[i];                //przepisz stare
+		}
+		for (int i = index; i < rozmiar; i++) {//kolejne tez przepisz
+			Kopia[i + 1] = Tab[i];
+		}
+
+		delete[] Tab;               //zwolnij pamiec
+		Tab = Kopia;          //przypisz nowy wskaznik
+		Kopia = nullptr;
+		rozmiar++;              //zwieksz rozmiar o jeden
+
+
 	}
 };
 
@@ -244,22 +256,9 @@ void Tablica::zaladujzpliku()
 		plik >> Tab[i];
 	plik.close();
 }
-;
-
-Tablica::Tablica()
-{
-	rozmiar = 0;//zeruje parametry
-	Tab = NULL;
-};
 
 
-Tablica::~Tablica()
-{
 
-	rozmiar = 0;
-	delete[] Tab;
-	Tab = 0;
-};
 
 void Tablica::Stworz()
 {

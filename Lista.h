@@ -1,9 +1,8 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <fstream>
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
-
 #include <string>
 
 struct Element
@@ -22,7 +21,6 @@ protected:
 
 public:
 	Lista(); //konstruktor bezparametrowy
-
 	~Lista(); //destruktor
 
 
@@ -30,7 +28,7 @@ public:
 
 	void StworzL(int val); //dodaje pierwszy element listy;
 
-	int dodajWlos(int val,int index); //dodaje wartosc na losowej pozycji, zwraca wylosowany indeks
+	int dodajWlos(int val, int index); //dodaje wartosc na losowej pozycji, zwraca wylosowany indeks
 
 	void dodajWpocz(int val); //dodaje wartosc na poczatku - head
 
@@ -43,11 +41,11 @@ public:
 	void usunWkon(); //usuwa tail
 
 	Element* znajdzL(int index); //zwraca wskaznik na node o danym indeksie - potrzebne do wstawiania w random
-							 //sprawdza, czy szybciej bedzie szukac od head do przodu czy od tail do tylu
+								 //sprawdza, czy szybciej bedzie szukac od head do przodu czy od tail do tylu
 	int znajdzWart(int val); //wyszukuje dana wartosc w liscie i zwraca indeks node'a
-							  //zwraca -1 jesli brak
+							 //zwraca -1 jesli brak
 	bool zaladujzplikuLista(); //wczytywanie z pliku
-									 //zwraca true jesli zakonczone powodzeniem, false jesli nie
+							   //zwraca true jesli zakonczone powodzeniem, false jesli nie
 	void wyswietlListe(); //wyswietlanie listy
 
 	void clear(); //usuwa liste Z JEDNYM ELEMENTEM, ustawia wskazniki na null i rozmiar na 0

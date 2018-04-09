@@ -1,24 +1,25 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <fstream>
 #include <iostream>
 #include <conio.h>
 #include <windows.h>
-class Kopiec
-{
+#include <string.h>
+
+class Kopiec {
 protected:
-	int rozmiar;
-	int* Tab;
+	int *Tab;
+	unsigned int rozmiar;
+
 
 public:
+	Kopiec();
+	~Kopiec();
+
+	void dodaj(int);
+	void usun(int);
+	bool sprawdzCzyIstnieje(int);
+	void wyswietlKopiec(std::string sp, std::string sn, int value);
+	void poprawStrukture();
 	bool zaladujzpliku();
-	void dodajdokopca(int value);
-	void usunzkopca(int value);
-	bool czyjestwsrod(int value);
-	void wyswietlkopiec();
 
-
-	
-	//Kopiec();
-	//~Kopiec();
 };
-

@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "Lista.h"
 #include <random>
 #include <fstream>
@@ -38,13 +38,16 @@ void Lista::StworzL(int val)
 	rozmiar++;
 }
 
-int Lista::dodajWlos(int val,int indeks)
+int Lista::dodajWlos(int val, int indeks)
 {
-	if (indeks > 0 & indeks < rozmiar++)
+	int a;
+	a = rozmiar + 1;
+	if (indeks > 0 & indeks < a)
 	{
 		if (poczatek == nullptr) //jesli lista pusta
 		{
 			StworzL(val);
+			dodajWpocz(val);
 			return 0;
 		}
 		else
@@ -90,7 +93,7 @@ int Lista::dodajWlos(int val,int indeks)
 
 void Lista::dodajWpocz(int val)
 {
-	if (poczatek==nullptr) //jesli lista pusta
+	if (poczatek == nullptr) //jesli lista pusta
 		StworzL(val);
 	else
 	{
@@ -122,14 +125,13 @@ void Lista::dodajWkon(int val)
 	}
 }
 
-int Lista::usunWlos(int indeks)
-
-{
-	if (indeks > 0 & indeks < rozmiar++)
+int Lista::usunWlos(int indeks){
+	int pom = rozmiar;
+	if (indeks > 0 & indeks < pom+1)
 	{
 		if (rozmiar > 0)
 		{
-			if (indeks > 0 || indeks < (rozmiar - 1)) {
+			if (indeks > 0 || indeks < (pom -2)) {
 				int index = indeks - 1;
 
 				if (index == 0) //przejdz do usun na poczatku
@@ -138,7 +140,7 @@ int Lista::usunWlos(int indeks)
 					return 0;
 				}
 
-				if (index == rozmiar - 1) //przejdz do usun na koncu
+				if (index == pom) //przejdz do usun na koncu
 				{
 					usunWkon();
 					return index;
@@ -230,7 +232,7 @@ int Lista::znajdzWart(int val)
 	for (int i = 0; i < rozmiar; i++)
 	{
 		if (element->wartosc == val)
-		return	true;
+			return	true;
 		else
 			element = element->nastepny;
 	}
@@ -274,12 +276,12 @@ void Lista::wyswietlListe()
 {
 	Element* element = poczatek; //wskaznik na aktualnie wypisywany element
 	int columnCounter = 0; //licznik kolumn
-    system("cls");
-	
+	system("cls");
+
 	for (int i = 0; i < rozmiar; i++)
 	{
-		
-		cout<<i+1<<". " << element->wartosc << endl;
+
+		cout << i + 1 << ". " << element->wartosc << endl;
 		element = element->nastepny;
 		if (++columnCounter == 20)
 		{
@@ -300,7 +302,7 @@ void Lista::czyJest(int value)
 	if (znajdzWart(value) == true)
 	{
 		system("cls");
-		cout<<endl << "Wartosc- "<<value<<", znajduje sie w liscie" << endl;
+		cout << endl << "Wartosc- " << value << ", znajduje sie w liscie" << endl;
 		Sleep(2000);
 		system("cls");
 	}

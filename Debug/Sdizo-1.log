@@ -1,0 +1,20 @@
+﻿  Lista.cpp
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\lista.cpp(45): warning C4554: "&": sprawdź ustawienie pierwszeństwa operatora w poszukiwaniu możliwych błędów; użyj nawiasów, aby wyjaśnić ustawienie pierwszeństwa
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\lista.cpp(130): warning C4554: "&": sprawdź ustawienie pierwszeństwa operatora w poszukiwaniu możliwych błędów; użyj nawiasów, aby wyjaśnić ustawienie pierwszeństwa
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\lista.cpp(302): warning C4805: "==": niebezpieczne połączenie typu "int" oraz typu "bool" w operacji
+  Generowanie kodu...
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\lista.cpp(174): warning C4715: "Lista::usunWlos”: niewszystkie ścieżki kodu zwracają wartość
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\lista.cpp(92): warning C4715: "Lista::dodajWlos”: niewszystkie ścieżki kodu zwracają wartość
+  Trwa kompilowanie...
+  Kopiec.cpp
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\kopiec.cpp(28): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\kopiec.cpp(56): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\kopiec.cpp(73): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\kopiec.cpp(81): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\kopiec.cpp(101): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\kopiec.cpp(131): warning C4309: "=": obcięcie stałej wartości
+c:\users\user\documents\visual studio 2017\projects\sdizo-1\sdizo-1\kopiec.cpp(133): warning C4018: "<": niezgodność typu ze znakiem/bez znaku
+  Generowanie kodu...
+  Pomijanie... (nie wykryto odpowiednich zmian)
+  menu.cpp
+  Sdizo-1.vcxproj -> C:\Users\User\Documents\Visual Studio 2017\Projects\Sdizo-1\Debug\Sdizo-1.exe
